@@ -1,0 +1,7 @@
+<ivy-module version="2.0">
+    <info organisation="com.mycompany" module="myproject"/>
+    <dependencies>
+        <dependency org="org.apache.poi" name="poi" rev="4.1.2"/>
+        <dependency org="org.apache.poi" name="poi-ooxml" rev="4.1.2"/>
+    </dependencies>
+</ivy-module>
