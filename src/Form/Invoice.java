@@ -12,6 +12,7 @@ import javax.swing.*;
 
 public class Invoice extends JPanel {
 	private Connect con = new Connect();
+	private String[] columnNames = {"I.id","C.name","C.phone","C.address","B.name","I.amount","I.bdate"};
 	private String sql = "select I.id,C.name N'Tên khách', C.phone N'SĐT', C.address N'Địa chỉ', B.name N'Tên sách',  I.amount N'Số lượng', I.bdate N'Ngày mượn'\n" +
 			"from Book B inner join Invoice I on B.id=I.book_id \n" +
 			"        inner join Card C on I.card_id=C.id";
@@ -190,14 +191,13 @@ public class Invoice extends JPanel {
 		btnNewButton_3 = new JButton("Sắp xếp");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(sql!=""){
 					try{
 						con.clearData(table);
-						con.sortBook(table, sql);
+						con.sortData(table, sql,"I.bdate");
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-				}
+
 			}
 		});
 		btnNewButton_3.setBounds(804, 137, 117, 25);
@@ -230,7 +230,7 @@ public class Invoice extends JPanel {
 						sql = "select I.id, C.name N'Tên khách', C.phone N'SĐT', C.address N'Địa chỉ', B.name N'Tên sách',  I.amount N'Số lượng', I.bdate N'Ngày mượn' \n" +
 								"from Book B inner join Invoice I on B.id=I.book_id \n" +
 								"        inner join Card C on I.card_id=C.id " +
-								"where id = '"+id+"'";
+								"where I.id = '"+id+"'";
 						con.clearData(table);
 						con.printData(table, sql);
 					} catch (SQLException e1) {
@@ -312,7 +312,7 @@ public class Invoice extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int col = table.columnAtPoint(e.getPoint());
-				String name = table.getColumnName(col);
+				String name = columnNames[col];
 				if(name!=""){
 					con.clearData(table);
 					try {

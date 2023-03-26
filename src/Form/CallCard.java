@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 public class CallCard extends JPanel {
+	private String[] columnNames = {"id","phone","name","address"};
 	private callCard card = new callCard();
 	private String id = "";
 	private String sql = "select id, name N'Tên khách', phone N'SĐT', address N'Địa chỉ' from Card";
@@ -264,7 +265,7 @@ public class CallCard extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int col = table.columnAtPoint(e.getPoint());
-				String name = table.getColumnName(col);
+				String name = columnNames[col];
 				if(name!=""){
 					con.clearData(table);
 					try {

@@ -126,7 +126,7 @@ public class Menu extends JFrame {
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Thông tin");
 		mntmNewMenuItem_4.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				JOptionPane.showMessageDialog(null, "Bài tập cuối kì: Lập trình hướng đối tượng\nSinh viên: Võ Thanh Phong\nMã sinh viên: 22IT222\nLớp: 22IGT1 \nChủ đề: Quản lý thư viện");
+				JOptionPane.showMessageDialog(null, "Bài tập cuối kì: Lập trình hướng đối tượng\nSinh viên: Võ Thanh Phong\nMã sinh viên: 22IT222\nLớp: 22GIT1 \nChủ đề: Quản lý thư viện");
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_4);
@@ -257,7 +257,7 @@ public class Menu extends JFrame {
 		JButton btnNewButton_3 = new JButton("Trợ giúp");
 		btnNewButton_3.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				JOptionPane.showMessageDialog(null, "Bài tập cuối kì: Lập trình hướng đối tượng\nSinh viên: Võ Thanh Phong\nMã sinh viên: 22IT222\nLớp: 22IGT1 \nChủ đề: Quản lý thư viện");
+				JOptionPane.showMessageDialog(null, "Bài tập cuối kì: Lập trình hướng đối tượng\nSinh viên: Võ Thanh Phong\nMã sinh viên: 22IT222\nLớp: 22GIT1 \nChủ đề: Quản lý thư viện");
 			}
 		});
 		toolBar.add(btnNewButton_3);

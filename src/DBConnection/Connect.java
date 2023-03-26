@@ -25,20 +25,20 @@ public class Connect {
         }
 
     }
-    public boolean checkLogin(String user,String pass) throws  SQLException{
+    public String checkLogin(String user,String pass) throws  SQLException{
         try{
             String sql = "select * from DANGNHAP where Username = '"+user+"' and Password = '"+pass+"'";
             rs = stmt.executeQuery(sql);
             if(rs.next()){
-                return true;
+                return rs.getString(4);
             }
             else {
-                return false;
+                return "-1";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return "-1";
     }
 
     public void clearData(JTable table){
@@ -89,9 +89,7 @@ public class Connect {
         if(rs.next()){
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
     public void addBook(String name,String author,String amount) throws SQLException{
         int id = 1;
@@ -338,7 +336,53 @@ public class Connect {
         }
     }
 
-    public void exportToFile(){
-
+    public ResultSet getCard(String id) throws SQLException{
+        String sql = "select * from Card where id = '"+id+"'";
+        rs = stmt.executeQuery(sql);
+        return rs;
+    }
+    public int getNumberOfBorrowedBooks(String id) throws SQLException{
+        //get the number of unique book_id in Invoice
+        String sql = "select count(distinct book_id) from Invoice where card_id = '"+id+"'";
+        rs = stmt.executeQuery(sql);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        else {
+            return 0;
+        }
+    }
+    public int getNumberOfBorrowedTransactions(String id) throws SQLException{
+        //get the amount of every transaction in Invoice where card_id = id
+        String sql = "select sum(amount) from Invoice where card_id = '"+id+"'";
+        rs= stmt.executeQuery(sql);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        else {
+            return 0;
+        }
+    }
+    public int getNumberOfOverdueTransactions(String id) throws SQLException{
+        //count transaction in Invoice where card_id = id and datediff(day,bdate,getdate()) >= 3
+        String sql = "select count(*) from Invoice where card_id = '"+id+"' and datediff(day,bdate,getdate()) >= 3";
+        rs = stmt.executeQuery(sql);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        else {
+            return 0;
+        }
+    }
+    public int getNumberOfTransactions(String id) throws SQLException{
+        //count transaction in Invoice where card_id = id
+        String sql = "select count(*) from Invoice where card_id = '"+id+"'";
+        rs = stmt.executeQuery(sql);
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        else {
+            return 0;
+        }
     }
 }

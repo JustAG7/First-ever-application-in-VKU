@@ -63,11 +63,20 @@ public class SignIn extends JDialog {
 				try {
 					String user = textField.getText();
 					String pass = pwdThot.getText();
-					if (con.checkLogin(user, pass)) {
-						JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
-						Menu menu = new Menu();
-						menu.setVisible(true);
-						dispose();
+					String role = con.checkLogin(user,pass);
+					if (role!="-1"){
+						System.out.println(role);
+                        int Role = Integer.parseInt(role);
+						if(Role==0){
+							Menu menu = new Menu();
+							menu.setVisible(true);
+							dispose();
+						}
+						else{
+							userMenu menu = new userMenu(role);
+							menu.setVisible(true);
+							dispose();
+						}
 					} else {
 						JOptionPane.showMessageDialog(null, "Đăng nhập thất bại");
 					}

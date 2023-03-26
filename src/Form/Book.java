@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 public class Book extends JPanel {
+	private String[] columnNames = {"id", "name", "author", "amount"};
 	private Connect con = new Connect();
 	private book bk = new book();
 	private String id = "";
@@ -196,7 +197,10 @@ public class Book extends JPanel {
 					else{
 						JOptionPane.showMessageDialog(null, "Xóa thành công");
 						con.deleteBook(id);
-
+						sql = "select id, name N'Tên sách', author N'Tác giả', amount N'Số lượng trong kho' \n" +
+								"from Book";
+						con.clearData(table);
+						con.printData(table,sql);
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -291,7 +295,6 @@ public class Book extends JPanel {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//blur button them
 				btnNewButton.setEnabled(false);
 				btnNewButton_1.setEnabled(true);
 				btnNewButton_2.setEnabled(true);
@@ -326,7 +329,7 @@ public class Book extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int col = table.columnAtPoint(e.getPoint());
-				String name = table.getColumnName(col);
+				String name = columnNames[col];
 				if(name!=""){
 					con.clearData(table);
 					try {
